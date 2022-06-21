@@ -2,10 +2,10 @@ import { Box, Container, SimpleGrid, useColorMode } from "@chakra-ui/react";
 import { hexToHsluv, hsluvToHex, hsluvToRgb, rgbToHsluv } from "hsluv";
 import type { NextPage } from "next";
 import { useState } from "react";
-import { hsluvToRgb256, isDark, rgb256ToHsluv, rgbToHex } from "./_colors";
-import TripleSlider from "./_rangegroup";
-import { TextInput } from "./_text";
-import { InfoLabel } from "./_utils";
+import { hsluvToRgb256, isDark, rgb256ToHsluv, rgbToHex } from "../lib/_colors";
+import TripleSlider from "../lib/_rangegroup";
+import { TextInput } from "../lib/_text";
+import { InfoLabel } from "../lib/_utils";
 
 const Home: NextPage = () => {
   let [hsl, setHsl] = useState([350, 80, 80] as [number, number, number]);
@@ -72,9 +72,9 @@ const Home: NextPage = () => {
           highs={[255, 255, 255]}
           steps={[0.1, 0.1, 0.1]}
           names={[
-            <InfoLabel name="R" info="Red" />,
-            <InfoLabel name="G" info="Green" />,
-            <InfoLabel name="B" info="Blue" />,
+            <InfoLabel key="rgb1" name="R" info="Red" />,
+            <InfoLabel key="rgb2" name="G" info="Green" />,
+            <InfoLabel key="rgb3" name="B" info="Blue" />,
           ]}
           setValues={(val) => {
             setColor(rgb256ToHsluv(val));
@@ -97,12 +97,14 @@ const Home: NextPage = () => {
           highs={[360, 100, 100]}
           steps={[0.1, 0.1, 0.1]}
           names={[
-            <InfoLabel name="H" info="Hue in degrees" />,
+            <InfoLabel key="hslh" name="H" info="Hue in degrees" />,
             <InfoLabel
+              key="hsls"
               name="S"
               info="Saturation: 0 is grayscale, 100 is as saturated as it can be without changing the hue or luminance"
             />,
             <InfoLabel
+              key="hsll"
               name="L"
               info="Lightness: unlike HSL/HSV, this actually approximates how we perceive lightness"
             />,
